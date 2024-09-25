@@ -6,7 +6,6 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json bunfig.toml bun.lockb ./
-RUN bun 
 RUN \
     if [ -f bun.lockb ]; then bun install --frozen-lockfile --verbose; \
     else echo "bun.lockb not found." && exit 1; \
