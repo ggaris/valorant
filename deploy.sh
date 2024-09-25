@@ -10,14 +10,9 @@ NC='\033[0m' # No Color
 # 定义服务器信息
 SERVER_USER="root"
 SERVER_IP="60.204.139.33"
-SERVER_PATH="/opt/myapp"
+SERVER_PATH="/opt/valorant"
 GIT_REPO="git@github.com:ggaris/valorant.git"
 
-# 1. 推送本地更改到 Git 仓库
-echo -e "${GREEN}正在推送本地更改到 Git 仓库...${NC}"
-git add .
-git commit -m "Deploy update: $(date)"
-git push origin main  # 假设你使用 main 分支，如果是其他分支请相应修改
 
 # 2. SSH 到服务器并更新代码
 echo -e "${GREEN}正在服务器上更新代码...${NC}"

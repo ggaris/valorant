@@ -1,28 +1,30 @@
 services:
   nextapp:
-      container_name: nextapp
-      image: nextapp:1.0.0
-      build:
-        context: ./frontend
-        dockerfile: next.dockerfile
-      ports:
-        - "3333:3333"
-      environment:
-        - NEXT_PUBLIC_API_URL=http://localhost:8000
-      depends_on:
-        - goapp
+    container_name: nextapp
+    image: nextapp:1.0.0
+    build:
+      context: ./frontend
+      dockerfile: next.dockerfile
+    ports:
+      - "3333:3333"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - goapp
   goapp:
-      container_name: goapp
-      image: francescoxx/goapp:1.0.0
-      build:
-        context: ./backend
-        dockerfile: go.dockerfile
-      environment:
-        DATABASE_URL: 'postgres://postgres:postgres@db:5432/postgres?sslmode=disable'
-      ports:
-        - '8888:8888'
-      depends_on:
-        - db
+    container_name: goapp
+    image: francescoxx/goapp:1.0.0
+    build:
+      context: ./backend
+      dockerfile: go.dockerfile
+      args:
+        - GOPROXY=https://goproxy.cn,direct
+    environment:
+      DATABASE_URL: 'postgres://postgres:postgres@db:5432/postgres?sslmode=disable'
+    ports:
+      - '8888:8888'
+    depends_on:
+      - db
 
   db:
     container_name: db
@@ -37,4 +39,4 @@ services:
       - pgdata:/var/lib/postgresql/data
 
 volumes:
-  pgdata: 
+  pgdata:
