@@ -1,7 +1,7 @@
 FROM oven/bun:1 AS base
 
 # 设置 npm 镜像源为淘宝镜像
-RUN bun pm set registry https://registry.npmmirror.com
+ENV BUN_INSTALL="bun install --registry=https://registry.npmmirror.com"
 
 # Install dependencies only when needed
 FROM base AS deps
