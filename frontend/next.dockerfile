@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json bunfig.toml bun.lockb ./
 RUN bun 
 RUN \
-    if [ -f bun.lockb ]; then bun install --frozen-lockfile; \
+    if [ -f bun.lockb ]; then bun install --frozen-lockfile --verbose; \
     else echo "bun.lockb not found." && exit 1; \
     fi
 
