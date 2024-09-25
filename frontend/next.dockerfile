@@ -1,14 +1,12 @@
 FROM oven/bun:1 AS base
 
-# 设置 npm 镜像源为淘宝镜像
-ENV BUN_INSTALL="bun install --registry=https://registry.npmmirror.com"
-
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json bun.lockb* ./
+COPY package.json bunfig.toml bun.lockb ./
+RUN bun 
 RUN \
     if [ -f bun.lockb ]; then bun install --frozen-lockfile; \
     else echo "bun.lockb not found." && exit 1; \
