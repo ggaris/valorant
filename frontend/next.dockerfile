@@ -8,7 +8,7 @@ FROM base AS deps
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json bun.lockb ./
+COPY package.json bun.lockb* ./
 RUN \
     if [ -f bun.lockb ]; then bun install --frozen-lockfile; \
     else echo "bun.lockb not found." && exit 1; \
